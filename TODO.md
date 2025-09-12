@@ -11,9 +11,8 @@
 - Expand instrumented UI tests to cover additional user flows.
 - Add instrumentation test for package count display.
 - Audit theme attributes for missing `android:` namespace.
-- Design customizable rest overlay message and appearance.
+- Design customizable rest screen message and appearance.
 - Review layout attributes of other input fields for consistency.
-- Document draw-over-other-apps permission flow for rest overlay.
 - Add diagram illustrating play/rest cycle in CONCEPT.md.
 - Implement PIN protection for settings configuration.
 - Allow changing cycle durations directly from the notification.
