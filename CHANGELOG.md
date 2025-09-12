@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Replaced theme `colorBackground` with `android:colorBackground` to ensure correct resource resolution.
 - Overlay now consumes touch events to block input during rest phase.
 - Text input fields on the main screen now stretch to full width.
+- Added required `FOREGROUND_SERVICE_DATA_SYNC` permission.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
