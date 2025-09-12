@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 - Resolved AAPT build error by externalizing accessibility service description.
+- Replaced theme `colorBackground` with `android:colorBackground` to ensure correct resource resolution.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
