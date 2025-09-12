@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Resolved AAPT build error by externalizing accessibility service description.
 - Replaced theme `colorBackground` with `android:colorBackground` to ensure correct resource resolution.
 - Overlay now consumes touch events to block input during rest phase.
+- Text input fields on the main screen now stretch to full width.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
@@ -28,3 +29,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added troubleshooting note about `android:exported` requirement on Android 12+.
 - Noted automatic light/dark theme switching in the UI guide.
 - Added FAQ entry explaining touch blocking during rest.
+- Noted full-width input fields on the main screen in the UI guide.
