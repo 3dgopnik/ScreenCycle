@@ -12,6 +12,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
 
+### Fixed
+- Resolved AAPT build error by externalizing accessibility service description.
+
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
 - Documented AndroidX and Jetifier build requirements.
