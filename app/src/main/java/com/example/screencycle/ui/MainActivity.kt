@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun isAccessibilityEnabled(): Boolean {
         val am = getSystemService(AccessibilityManager::class.java) ?: return false
-        val enabled = am.enabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
+        val enabled = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
         return enabled.any {
             it.resolveInfo.serviceInfo.packageName == packageName &&
                 it.resolveInfo.serviceInfo.name == AppAccessibilityService::class.java.name
