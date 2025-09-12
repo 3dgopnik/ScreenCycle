@@ -12,3 +12,4 @@
 - Audit theme attributes for missing `android:` namespace.
 - Design customizable rest overlay message and appearance.
 - Review layout attributes of other input fields for consistency.
+- Document draw-over-other-apps permission flow for rest overlay.
