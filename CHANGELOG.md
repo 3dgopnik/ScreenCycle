@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added main screen counter showing number of selected apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
+- Dialog prompting to enable accessibility service when disabled.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
@@ -23,6 +24,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Replaced `Prefs` usage in activities and services with `SettingsRepository`.
 - Replaced global broadcasts with `LocalBroadcastManager`.
 - `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages.
+- Cycle starts only when required permissions are granted.
+- Start button toggles between "Working..." and "Stop" while the cycle runs.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
@@ -47,3 +50,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Updated UI guide and README to mention selected app counter.
  - Updated roadmap statuses for MVP features.
 - Documented cycle timer on the main screen.
+- Added UI guide section for start/stop button and noted permission dialog in quickstart.
