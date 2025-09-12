@@ -1,0 +1,2 @@
+rootProject.name = "ScreenCycle"
+include(":app")

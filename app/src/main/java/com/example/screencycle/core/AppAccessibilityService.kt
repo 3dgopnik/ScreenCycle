@@ -1,0 +1,40 @@
+package com.example.screencycle.core
+
+import android.accessibilityservice.AccessibilityService
+import android.content.Intent
+import android.view.accessibility.AccessibilityEvent
+
+class AppAccessibilityService : AccessibilityService() {
+    private var inRest = false
+    private val packages get() = Prefs.getPackages(this)
+
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
+        if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            val pkg = event.packageName?.toString() ?: return
+            if (inRest && packages.contains(pkg)) {
+                startService(Intent(this, BlockOverlayService::class.java))
+            }
+        }
+    }
+
+    override fun onInterrupt() {}
+
+    private val stateReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context?, intent: Intent?) {
+            if (intent?.action == CycleService.ACTION_STATE) {
+                inRest = intent.getBooleanExtra(CycleService.EXTRA_REST, false)
+                if (!inRest) stopService(Intent(this@AppAccessibilityService, BlockOverlayService::class.java))
+            }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        registerReceiver(stateReceiver, android.content.IntentFilter(CycleService.ACTION_STATE))
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(stateReceiver)
+        super.onDestroy()
+    }
+}
