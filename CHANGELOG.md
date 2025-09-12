@@ -19,9 +19,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 - Resolved AAPT build error by externalizing accessibility service description.
+- Overlay now consumes touch events to block input during rest phase.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
 - Documented AndroidX and Jetifier build requirements.
 - Added troubleshooting note about `android:exported` requirement on Android 12+.
 - Noted automatic light/dark theme switching in the UI guide.
+- Added FAQ entry explaining touch blocking during rest.
