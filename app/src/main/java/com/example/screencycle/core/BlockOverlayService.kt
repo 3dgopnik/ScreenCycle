@@ -27,7 +27,7 @@ class BlockOverlayService : Service() {
         wm = getSystemService(WINDOW_SERVICE) as WindowManager
         overlay = LayoutInflater.from(this).inflate(android.R.layout.simple_list_item_1, null)
         overlay.findViewById<TextView>(android.R.id.text1).text = "Время отдыха. Пожалуйста, сделай перерыв."
-        overlay.setOnClickListener { }
+        overlay.setOnTouchListener { _, _ -> true }
 
         registerReceiver(stateReceiver, IntentFilter(CycleService.ACTION_STATE))
     }
@@ -41,7 +41,6 @@ class BlockOverlayService : Service() {
             WindowManager.LayoutParams.MATCH_PARENT,
             type,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
             WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             PixelFormat.TRANSLUCENT
         )
