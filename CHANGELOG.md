@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 - Resolved AAPT build error by externalizing accessibility service description.
+- Replaced theme `colorBackground` with `android:colorBackground` to ensure correct resource resolution.
 - Overlay now consumes touch events to block input during rest phase.
 
 ### Docs
