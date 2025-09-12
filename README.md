@@ -20,5 +20,6 @@
 Open in **Android Studio** (Arctic Fox or newer).
 - minSdk 26, targetSdk 34
 - Kotlin
+- AndroidX with Jetifier (enabled in `gradle.properties`)
 
 > This is an MVP scaffold. Hardening, PIN lock, and full Co‑Pilot logic will be added in subsequent commits.

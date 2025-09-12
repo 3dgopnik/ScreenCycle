@@ -1,0 +1,11 @@
+# Руководство ScreenCycle
+
+Добро пожаловать в пользовательский мануал приложения ScreenCycle.
+
+- [Быстрый старт](quickstart.md)
+- [Руководство по интерфейсу](ui-guide.md)
+- [CLI](cli.md)
+- [Конфигурация](config.md)
+- [Рабочие сценарии](workflows.md)
+- [Устранение неполадок](troubleshooting.md)
+- [FAQ](faq.md)
