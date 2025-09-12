@@ -10,3 +10,4 @@
 - Enhance theme with dynamic color support and custom palettes.
 - Expand instrumented UI tests to cover additional user flows.
 - Audit theme attributes for missing `android:` namespace.
+- Design customizable rest overlay message and appearance.
