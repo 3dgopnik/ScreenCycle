@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import kotlinx.coroutines.*
 
 class CycleService : Service() {
@@ -18,6 +19,7 @@ class CycleService : Service() {
         const val ACTION_STOP = "STOP"
         const val ACTION_STATE = "com.example.screencycle.STATE"
         const val EXTRA_REST = "rest"
+        const val EXTRA_REMAINING = "remaining"
     }
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -48,24 +50,32 @@ class CycleService : Service() {
     private suspend fun loop() {
         while (running) {
             inRest = false
-            sendState(false)
-            val play = settings.getGameMinutes()
-            val playMs = play * 60_000L
-            updateNotif("Игра: ${play} мин")
-            delay(playMs)
-
+            runPhase(false, settings.getGameMinutes())
+            if (!running) break
             inRest = true
-            sendState(true)
-            val rest = settings.getRestMinutes()
-            val restMs = rest * 60_000L
-            updateNotif("Отдых: ${rest} мин")
-            delay(restMs)
+            runPhase(true, settings.getRestMinutes())
         }
     }
 
-    private fun sendState(rest: Boolean) {
-        val i = Intent(ACTION_STATE).apply { putExtra(EXTRA_REST, rest) }
-        sendBroadcast(i)
+    private suspend fun runPhase(rest: Boolean, minutes: Int) {
+        var remaining = minutes * 60_000L
+        val label = if (rest) "Отдых" else "Игра"
+        while (running && remaining > 0) {
+            val m = remaining / 60_000
+            val s = (remaining / 1000) % 60
+            updateNotif("$label: $m:${"%02d".format(s)}")
+            sendState(rest, remaining)
+            delay(1_000)
+            remaining -= 1_000
+        }
+    }
+
+    private fun sendState(rest: Boolean, remaining: Long) {
+        val i = Intent(ACTION_STATE).apply {
+            putExtra(EXTRA_REST, rest)
+            putExtra(EXTRA_REMAINING, remaining)
+        }
+        LocalBroadcastManager.getInstance(this).sendBroadcast(i)
     }
 
     private fun notification(text: String): Notification =
