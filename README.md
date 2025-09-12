@@ -6,11 +6,11 @@
 - Set play/rest durations (defaults 30/30).
 - Select “game” apps to control.
 - Foreground service runs a PLAY/REST loop.
-- During REST, selected apps are blocked with a full‑screen overlay.
+- During REST, selected apps are blocked with a full-screen overlay.
 - Accessibility Service detects active app.
-- PIN‑gated settings.
+- PIN-gated settings.
 
-## Co‑Pilot to Family Link (concept)
+## Co-Pilot to Family Link (concept)
 - Respect Family Link windows (study/sleep). Work **only** inside allowed windows.
 - Parent defines “daily budget” and cycle lengths (e.g., 2h total, 30/30).
 - Two placement modes inside evening window: **continuous** or **spread across window**.
@@ -22,4 +22,8 @@ Open in **Android Studio** (Arctic Fox or newer).
 - Kotlin
 - AndroidX with Jetifier (enabled in `gradle.properties`)
 
-> This is an MVP scaffold. Hardening, PIN lock, and full Co‑Pilot logic will be added in subsequent commits.
+## Documentation
+- [User manual](docs/index.md)
+- [Quickstart](docs/quickstart.md)
+
+> This is an MVP scaffold. Hardening, PIN lock, and full Co-Pilot logic will be added in subsequent commits.
