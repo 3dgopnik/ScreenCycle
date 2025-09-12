@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
 - Added instrumented test to verify `MainActivity` launches without exceptions.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
+- Added main screen counter showing number of selected apps.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
@@ -38,3 +39,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added FAQ entry explaining touch blocking during rest.
 - Noted full-width input fields on the main screen in the UI guide.
 - Documented project concept in root `CONCEPT.md` and linked from README and docs index.
+- Updated UI guide and README to mention selected app counter.
