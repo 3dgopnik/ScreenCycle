@@ -10,6 +10,7 @@
 - Accessibility Service detects active app.
 - PIN-gated settings.
 - Main screen shows count of selected apps.
+- Main screen displays remaining time in the current phase.
 
 ## Co-Pilot to Family Link (concept)
 - Respect Family Link windows (study/sleep). Work **only** inside allowed windows.

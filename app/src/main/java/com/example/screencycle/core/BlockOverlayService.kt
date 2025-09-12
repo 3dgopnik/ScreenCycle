@@ -2,6 +2,7 @@ package com.example.screencycle.core
 
 import android.app.Service
 import android.content.*
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.graphics.PixelFormat
 import android.os.IBinder
 import android.view.*
@@ -29,7 +30,10 @@ class BlockOverlayService : Service() {
         overlay.findViewById<TextView>(android.R.id.text1).text = "Время отдыха. Пожалуйста, сделай перерыв."
         overlay.setOnTouchListener { _, _ -> true }
 
-        registerReceiver(stateReceiver, IntentFilter(CycleService.ACTION_STATE))
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+            stateReceiver,
+            IntentFilter(CycleService.ACTION_STATE)
+        )
     }
 
     private fun show() {
@@ -56,7 +60,7 @@ class BlockOverlayService : Service() {
     private fun updateOverlay() { if (isRest) show() else hide() }
 
     override fun onDestroy() {
-        unregisterReceiver(stateReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(stateReceiver)
         hide()
         super.onDestroy()
     }

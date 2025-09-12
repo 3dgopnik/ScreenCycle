@@ -13,12 +13,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added instrumented test to verify `MainActivity` launches without exceptions.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added main screen counter showing number of selected apps.
+- Cycle service now broadcasts remaining time every second and updates notification and UI.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
 - Set Java and Kotlin compilation targets to version 17.
 - Switched app theme to inherit from `Theme.MaterialComponents.DayNight.NoActionBar`.
 - Replaced `Prefs` usage in activities and services with `SettingsRepository`.
+- Replaced global broadcasts with `LocalBroadcastManager`.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
@@ -41,3 +43,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documented project concept in root `CONCEPT.md` and linked from README and docs index.
 - Updated UI guide and README to mention selected app counter.
  - Updated roadmap statuses for MVP features.
+- Documented cycle timer on the main screen.
