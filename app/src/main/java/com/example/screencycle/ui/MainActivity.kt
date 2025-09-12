@@ -1,19 +1,26 @@
 package com.example.screencycle.ui
 
+import android.accessibilityservice.AccessibilityServiceInfo
+import android.app.ActivityManager
+import android.app.AppOpsManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.Process
 import android.provider.Settings
+import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.screencycle.R
+import com.example.screencycle.core.AppAccessibilityService
 import com.example.screencycle.core.CycleService
 import com.example.screencycle.core.SettingsRepository
 import kotlinx.coroutines.launch
@@ -22,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private val settings by lazy { SettingsRepository(this) }
     private lateinit var tvPackageCount: TextView
     private lateinit var tvTimer: TextView
+    private lateinit var btnStart: Button
+    private var cycleRunning = false
 
     private val stateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -43,8 +52,7 @@ class MainActivity : AppCompatActivity() {
         val etPlay = findViewById<TextInputEditText>(R.id.etPlay)
         val etRest = findViewById<TextInputEditText>(R.id.etRest)
         val btnApps = findViewById<Button>(R.id.btnApps)
-        val btnStart = findViewById<Button>(R.id.btnStart)
-        val btnStop = findViewById<Button>(R.id.btnStop)
+        btnStart = findViewById(R.id.btnStart)
         tvPackageCount = findViewById(R.id.tvPackageCount)
         tvTimer = findViewById(R.id.tvTimer)
 
@@ -58,23 +66,31 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnStart.setOnClickListener {
-            val p = etPlay.text?.toString()?.toIntOrNull() ?: 30
-            val r = etRest.text?.toString()?.toIntOrNull() ?: 30
-            lifecycleScope.launch {
-                settings.setGameMinutes(p)
-                settings.setRestMinutes(r)
+            if (cycleRunning) {
+                stopService(Intent(this, CycleService::class.java))
+                btnStart.text = "Start"
+                cycleRunning = false
+            } else {
+                val p = etPlay.text?.toString()?.toIntOrNull() ?: 30
+                val r = etRest.text?.toString()?.toIntOrNull() ?: 30
+                lifecycleScope.launch {
+                    settings.setGameMinutes(p)
+                    settings.setRestMinutes(r)
+                }
+                if (ensurePermissions()) {
+                    btnStart.text = "Working..."
+                    startForegroundService(Intent(this, CycleService::class.java).setAction(CycleService.ACTION_START))
+                    btnStart.text = "Stop"
+                    cycleRunning = true
+                }
             }
-            ensurePermissions()
-            startForegroundService(Intent(this, CycleService::class.java).setAction(CycleService.ACTION_START))
-        }
-
-        btnStop.setOnClickListener {
-            stopService(Intent(this, CycleService::class.java))
         }
     }
 
     override fun onStart() {
         super.onStart()
+        cycleRunning = isCycleServiceRunning()
+        btnStart.text = if (cycleRunning) "Stop" else "Start"
         LocalBroadcastManager.getInstance(this).registerReceiver(
             stateReceiver,
             IntentFilter(CycleService.ACTION_STATE)
@@ -94,12 +110,48 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    private fun ensurePermissions() {
+    private fun ensurePermissions(): Boolean {
+        var ok = true
         if (!Settings.canDrawOverlays(this)) {
             val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
             startActivity(i)
+            ok = false
         }
-        try { startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) } catch (_: Exception) {}
-        try { startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) } catch (_: Exception) {}
+        if (!hasUsageStats()) {
+            try { startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) } catch (_: Exception) {}
+            ok = false
+        }
+        if (!isAccessibilityEnabled()) {
+            MaterialAlertDialogBuilder(this)
+                .setMessage("Accessibility service is disabled")
+                .setPositiveButton("Enable now") { _, _ ->
+                    try { startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) } catch (_: Exception) {}
+                }
+                .setNegativeButton("Later", null)
+                .show()
+            ok = false
+        }
+        return ok
+    }
+
+    private fun hasUsageStats(): Boolean {
+        val appOps = getSystemService(AppOpsManager::class.java) ?: return false
+        val mode = appOps.unsafeCheckOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, Process.myUid(), packageName)
+        return mode == AppOpsManager.MODE_ALLOWED
+    }
+
+    private fun isAccessibilityEnabled(): Boolean {
+        val am = getSystemService(AccessibilityManager::class.java) ?: return false
+        val enabled = am.enabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
+        return enabled.any {
+            it.resolveInfo.serviceInfo.packageName == packageName &&
+                it.resolveInfo.serviceInfo.name == AppAccessibilityService::class.java.name
+        }
+    }
+
+    private fun isCycleServiceRunning(): Boolean {
+        val am = getSystemService(ActivityManager::class.java) ?: return false
+        val services = am.getRunningServices(Int.MAX_VALUE)
+        return services.any { it.service.className == CycleService::class.java.name }
     }
 }
