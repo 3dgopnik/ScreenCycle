@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 ### Added
 - Added `gradle.properties` enabling AndroidX and Jetifier.
+- Added placeholder adaptive launcher icons.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
