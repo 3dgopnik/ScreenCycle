@@ -24,6 +24,7 @@ Open in **Android Studio** (Arctic Fox or newer).
 - Requires JDK 17 (source/target compatibility and Kotlin `jvmTarget`)
 
 ## Documentation
+- [Project concept](CONCEPT.md)
 - [User manual](docs/index.md)
 - [Quickstart](docs/quickstart.md)
 
