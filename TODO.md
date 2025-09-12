@@ -8,3 +8,4 @@
 - Add CI check for required JDK/JVM version.
 - Ensure Android SDK platform 34 and build-tools 34 are installed and licenses accepted for builds.
 - Enhance theme with dynamic color support and custom palettes.
+- Expand instrumented UI tests to cover additional user flows.
