@@ -32,3 +32,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Noted automatic light/dark theme switching in the UI guide.
 - Added FAQ entry explaining touch blocking during rest.
 - Noted full-width input fields on the main screen in the UI guide.
+- Documented project concept in root `CONCEPT.md` and linked from README and docs index.
