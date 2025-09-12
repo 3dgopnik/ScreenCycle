@@ -11,3 +11,4 @@
 - Expand instrumented UI tests to cover additional user flows.
 - Audit theme attributes for missing `android:` namespace.
 - Design customizable rest overlay message and appearance.
+- Review layout attributes of other input fields for consistency.

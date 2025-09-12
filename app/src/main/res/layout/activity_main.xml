@@ -13,6 +13,8 @@
         app:layout_constraintEnd_toEndOf="parent">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Минут игры (например, 30)"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -27,6 +29,8 @@
         android:layout_marginTop="12dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etRest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="number"
             android:hint="Минут отдыха (например, 30)"/>
     </com.google.android.material.textfield.TextInputLayout>
