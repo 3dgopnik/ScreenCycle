@@ -11,11 +11,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Introduced day/night theme and color palette.
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
 - Added instrumented test to verify `MainActivity` launches without exceptions.
+- Added `SettingsRepository` using DataStore for durations and blocked packages.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
 - Set Java and Kotlin compilation targets to version 17.
 - Switched app theme to inherit from `Theme.MaterialComponents.DayNight.NoActionBar`.
+- Replaced `Prefs` usage in activities and services with `SettingsRepository`.
+
+### Removed
+- Removed legacy `Prefs` helper based on `SharedPreferences`.
 
 ### Fixed
 - Resolved AAPT build error by externalizing accessibility service description.

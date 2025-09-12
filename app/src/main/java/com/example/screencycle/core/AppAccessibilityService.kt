@@ -3,10 +3,13 @@ package com.example.screencycle.core
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.view.accessibility.AccessibilityEvent
+import kotlinx.coroutines.*
 
 class AppAccessibilityService : AccessibilityService() {
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    private val settings by lazy { SettingsRepository(this) }
     private var inRest = false
-    private val packages get() = Prefs.getPackages(this)
+    private var packages: Set<String> = emptySet()
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
@@ -31,10 +34,12 @@ class AppAccessibilityService : AccessibilityService() {
     override fun onCreate() {
         super.onCreate()
         registerReceiver(stateReceiver, android.content.IntentFilter(CycleService.ACTION_STATE))
+        scope.launch { packages = settings.getBlockedPackages() }
     }
 
     override fun onDestroy() {
         unregisterReceiver(stateReceiver)
+        scope.cancel()
         super.onDestroy()
     }
 }

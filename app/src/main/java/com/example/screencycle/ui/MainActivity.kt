@@ -9,9 +9,13 @@ import com.google.android.material.textfield.TextInputEditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.screencycle.R
 import com.example.screencycle.core.CycleService
-import com.example.screencycle.core.Prefs
+import com.example.screencycle.core.SettingsRepository
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val settings by lazy { SettingsRepository(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         val btnStart = findViewById<Button>(R.id.btnStart)
         val btnStop = findViewById<Button>(R.id.btnStop)
 
-        etPlay.setText(Prefs.getPlayMinutes(this).toString())
-        etRest.setText(Prefs.getRestMinutes(this).toString())
+        lifecycleScope.launch {
+            etPlay.setText(settings.getGameMinutes().toString())
+            etRest.setText(settings.getRestMinutes().toString())
+        }
 
         btnApps.setOnClickListener {
             startActivity(Intent(this, AppSelectionActivity::class.java))
@@ -32,8 +38,10 @@ class MainActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             val p = etPlay.text?.toString()?.toIntOrNull() ?: 30
             val r = etRest.text?.toString()?.toIntOrNull() ?: 30
-            Prefs.setPlayMinutes(this, p)
-            Prefs.setRestMinutes(this, r)
+            lifecycleScope.launch {
+                settings.setGameMinutes(p)
+                settings.setRestMinutes(r)
+            }
             ensurePermissions()
             startForegroundService(Intent(this, CycleService::class.java).setAction(CycleService.ACTION_START))
         }

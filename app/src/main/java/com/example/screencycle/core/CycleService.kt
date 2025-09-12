@@ -21,6 +21,7 @@ class CycleService : Service() {
     }
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    private val settings by lazy { SettingsRepository(this) }
     private var running = false
     private var inRest = false
 
@@ -41,7 +42,6 @@ class CycleService : Service() {
     private fun startCycle() {
         if (running) return
         running = true
-        Prefs.setRunning(this, true)
         scope.launch { loop() }
     }
 
@@ -49,14 +49,16 @@ class CycleService : Service() {
         while (running) {
             inRest = false
             sendState(false)
-            val playMs = Prefs.getPlayMinutes(this@CycleService) * 60_000L
-            updateNotif("Игра: ${Prefs.getPlayMinutes(this@CycleService)} мин")
+            val play = settings.getGameMinutes()
+            val playMs = play * 60_000L
+            updateNotif("Игра: ${play} мин")
             delay(playMs)
 
             inRest = true
             sendState(true)
-            val restMs = Prefs.getRestMinutes(this@CycleService) * 60_000L
-            updateNotif("Отдых: ${Prefs.getRestMinutes(this@CycleService)} мин")
+            val rest = settings.getRestMinutes()
+            val restMs = rest * 60_000L
+            updateNotif("Отдых: ${rest} мин")
             delay(restMs)
         }
     }
@@ -88,7 +90,6 @@ class CycleService : Service() {
 
     override fun onDestroy() {
         running = false
-        Prefs.setRunning(this, false)
         scope.cancel()
         super.onDestroy()
     }
