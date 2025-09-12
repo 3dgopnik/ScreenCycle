@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.screencycle.R
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val settings by lazy { SettingsRepository(this) }
+    private lateinit var tvPackageCount: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val btnApps = findViewById<Button>(R.id.btnApps)
         val btnStart = findViewById<Button>(R.id.btnStart)
         val btnStop = findViewById<Button>(R.id.btnStop)
+        tvPackageCount = findViewById(R.id.tvPackageCount)
 
         lifecycleScope.launch {
             etPlay.setText(settings.getGameMinutes().toString())
@@ -48,6 +51,14 @@ class MainActivity : AppCompatActivity() {
 
         btnStop.setOnClickListener {
             stopService(Intent(this, CycleService::class.java))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            val count = settings.getBlockedPackages().size
+            tvPackageCount.text = "Выбрано игр: $count"
         }
     }
 

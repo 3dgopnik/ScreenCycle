@@ -9,6 +9,7 @@
 - During REST, selected apps are blocked with a full-screen overlay.
 - Accessibility Service detects active app.
 - PIN-gated settings.
+- Main screen shows count of selected apps.
 
 ## Co-Pilot to Family Link (concept)
 - Respect Family Link windows (study/sleep). Work **only** inside allowed windows.
