@@ -4,6 +4,6 @@
 |---------|-----------------------|---------|
 | `android.useAndroidX` | `true` | Включает поддержку AndroidX. |
 | `android.enableJetifier` | `true` | Включает Jetifier для миграции зависимостей. |
-| `jvmTarget` | `21` | Kotlin JVM target и версия Java для компиляции. |
+| `jvmTarget` | `17` | Kotlin JVM target и версия Java для компиляции. |
 
 Первые два параметра заданы в `gradle.properties` и должны оставаться включёнными. Параметр `jvmTarget` находится в `app/build.gradle` и должен совпадать с установленной версией JDK.
