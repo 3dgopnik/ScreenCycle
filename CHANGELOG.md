@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added main screen counter showing number of selected apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
+- Introduced `BlockActivity` to display a full-screen rest screen.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
@@ -21,9 +22,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Switched app theme to inherit from `Theme.MaterialComponents.DayNight.NoActionBar`.
 - Replaced `Prefs` usage in activities and services with `SettingsRepository`.
 - Replaced global broadcasts with `LocalBroadcastManager`.
+- `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
+- Removed `BlockOverlayService` and related overlay permission.
 
 ### Fixed
 - Resolved AAPT build error by externalizing accessibility service description.

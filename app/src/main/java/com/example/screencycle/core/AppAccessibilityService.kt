@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.accessibility.AccessibilityEvent
 import kotlinx.coroutines.*
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.screencycle.ui.BlockActivity
 
 class AppAccessibilityService : AccessibilityService() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -16,7 +17,11 @@ class AppAccessibilityService : AccessibilityService() {
         if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             val pkg = event.packageName?.toString() ?: return
             if (inRest && packages.contains(pkg)) {
-                startService(Intent(this, BlockOverlayService::class.java))
+                performGlobalAction(GLOBAL_ACTION_HOME)
+                val intent = Intent(this, BlockActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
+                startActivity(intent)
             }
         }
     }
@@ -27,7 +32,6 @@ class AppAccessibilityService : AccessibilityService() {
         override fun onReceive(context: android.content.Context?, intent: Intent?) {
             if (intent?.action == CycleService.ACTION_STATE) {
                 inRest = intent.getBooleanExtra(CycleService.EXTRA_REST, false)
-                if (!inRest) stopService(Intent(this@AppAccessibilityService, BlockOverlayService::class.java))
             }
         }
     }

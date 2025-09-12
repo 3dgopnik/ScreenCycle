@@ -6,12 +6,11 @@ Split Family Link’s allowed windows into child-friendly cycles: PLAY for N min
 ## Architecture (MVP)
 - `CycleService` — foreground service that toggles PLAY/REST and broadcasts state.
 - `AppAccessibilityService` — watches current foreground app.
-- `BlockOverlayService` — draws full-screen overlay during REST for selected packages.
+- `BlockActivity` — shows full-screen rest screen during REST for selected packages.
 - `SettingsRepository` — stores durations and selected packages.
 - `MainActivity`, `AppSelectionActivity` — UI.
 
 ## Permissions
-- Overlay (draw over other apps)
 - Accessibility Service
 - Usage Stats (optional telemetry for robustness)
 - Notifications (foreground service)
@@ -29,12 +28,11 @@ No public API for Family Link → Co-Pilot mode infers availability via device s
 ## Архитектура (MVP)
 - `CycleService` — foreground-служба, переключающая ИГРУ/ОТДЫХ и транслирующая состояние.
 - `AppAccessibilityService` — отслеживает текущее активное приложение.
-- `BlockOverlayService` — рисует полноэкранный оверлей во время ОТДЫХА для выбранных пакетов.
+- `BlockActivity` — показывает полноэкранное окно отдыха во время ОТДЫХА для выбранных пакетов.
 - `SettingsRepository` — сохраняет длительности и выбранные пакеты.
 - `MainActivity`, `AppSelectionActivity` — интерфейс.
 
 ## Разрешения
-- Наложение поверх других приложений
 - Служба доступности
 - Статистика использования (необязательная телеметрия для устойчивости)
 - Уведомления (foreground-служба)
