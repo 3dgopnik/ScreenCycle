@@ -1,6 +1,7 @@
 package com.example.screencycle.ui
 
 import android.accessibilityservice.AccessibilityServiceInfo
+import android.app.ActivityManager
 import android.app.AppOpsManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -88,6 +89,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        cycleRunning = isCycleServiceRunning()
+        btnStart.text = if (cycleRunning) "Stop" else "Start"
         LocalBroadcastManager.getInstance(this).registerReceiver(
             stateReceiver,
             IntentFilter(CycleService.ACTION_STATE)
@@ -144,5 +147,11 @@ class MainActivity : AppCompatActivity() {
             it.resolveInfo.serviceInfo.packageName == packageName &&
                 it.resolveInfo.serviceInfo.name == AppAccessibilityService::class.java.name
         }
+    }
+
+    private fun isCycleServiceRunning(): Boolean {
+        val am = getSystemService(ActivityManager::class.java) ?: return false
+        val services = am.getRunningServices(Int.MAX_VALUE)
+        return services.any { it.service.className == CycleService::class.java.name }
     }
 }

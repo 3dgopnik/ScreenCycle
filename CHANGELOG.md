@@ -38,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Text input fields on the main screen now stretch to full width.
 - Added required `FOREGROUND_SERVICE_DATA_SYNC` permission.
 - Removed deprecated `TYPE_PHONE` overlay window type.
+- Start button now detects running cycle on app return and shows **Stop**.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
