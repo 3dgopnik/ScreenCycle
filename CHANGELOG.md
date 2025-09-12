@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added placeholder adaptive launcher icons.
 - Introduced day/night theme and color palette.
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
+- Added instrumented test to verify `MainActivity` launches without exceptions.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
