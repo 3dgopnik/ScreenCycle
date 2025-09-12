@@ -7,3 +7,4 @@
 - Localize user-visible strings, including accessibility descriptions.
 - Add CI check for required JDK/JVM version.
 - Ensure Android SDK platform 34 and build-tools 34 are installed and licenses accepted for builds.
+- Enhance theme with dynamic color support and custom palettes.
