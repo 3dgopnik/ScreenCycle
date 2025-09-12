@@ -21,6 +21,7 @@ Open in **Android Studio** (Arctic Fox or newer).
 - minSdk 26, targetSdk 34
 - Kotlin
 - AndroidX with Jetifier (enabled in `gradle.properties`)
+- Requires JDK 21 (source/target compatibility and Kotlin `jvmTarget`)
 
 ## Documentation
 - [User manual](docs/index.md)

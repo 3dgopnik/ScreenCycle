@@ -5,3 +5,4 @@
 - Replace placeholder launcher icons with final design.
 - Add screenshots for quickstart and UI guide.
 - Localize user-visible strings, including accessibility descriptions.
+- Add CI check for required JDK/JVM version.
