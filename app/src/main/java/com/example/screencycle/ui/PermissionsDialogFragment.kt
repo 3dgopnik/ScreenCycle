@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.os.PowerManager
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.screencycle.R
@@ -16,6 +17,7 @@ class PermissionsDialogFragment : DialogFragment() {
     private fun buildDialog() =
         MaterialAlertDialogBuilder(requireContext()).apply {
             val ctx = requireContext()
+            val pm = ctx.getSystemService(PowerManager::class.java)
             val (msg, intent) = when {
                 !Permissions.canDrawOverlays(ctx) ->
                     R.string.missing_overlay to Intent(
@@ -24,8 +26,14 @@ class PermissionsDialogFragment : DialogFragment() {
                     )
                 !Permissions.hasUsageStats(ctx) ->
                     R.string.missing_usage_stats to Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-                else ->
+                !Permissions.isAccessibilityEnabled(ctx) ->
                     R.string.missing_accessibility to Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                pm != null && !pm.isIgnoringBatteryOptimizations(ctx.packageName) ->
+                    R.string.missing_battery_optimization to Intent(
+                        Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                        Uri.parse("package:${ctx.packageName}")
+                    )
+                else -> error("All permissions granted")
             }
             setMessage(msg)
             setPositiveButton(R.string.open_settings) { _, _ -> startActivity(intent) }

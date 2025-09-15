@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages.
 - Cycle starts only when required permissions are granted.
 - Start button toggles between "Working..." and "Stop" while the cycle runs.
+- Permissions dialog now handles battery optimization exemption; duplicate logic removed from `MainActivity`.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
@@ -56,4 +57,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documented cycle timer on the main screen.
 - Added UI guide section for start/stop button and noted permission dialog in quickstart.
 - Documented permissions dialog and battery optimization request in quickstart and UI guide.
+- Clarified battery optimization handling in quickstart and UI guide.
 - Introduced permissions dialog guiding overlay, usage access, accessibility and battery optimization exemption.

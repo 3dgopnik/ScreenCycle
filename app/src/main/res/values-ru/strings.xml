@@ -18,6 +18,7 @@
     <string name="missing_overlay">Требуется разрешение поверх других окон.</string>
     <string name="missing_usage_stats">Нужен доступ к статистике использования.</string>
     <string name="missing_accessibility">Сервис доступности отключен.</string>
+    <string name="missing_battery_optimization">Приложение должно быть исключено из оптимизации батареи.</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="icon">иконка</string>
     <string name="service_started">Запущено</string>
