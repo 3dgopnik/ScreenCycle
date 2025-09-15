@@ -21,6 +21,7 @@ import com.example.screencycle.core.CycleService
 import com.example.screencycle.core.Permissions
 import com.example.screencycle.core.SettingsRepository
 import kotlinx.coroutines.launch
+import androidx.annotation.VisibleForTesting
 
 class MainActivity : AppCompatActivity() {
     private val settings by lazy { SettingsRepository(this) }
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTimer: TextView
     private lateinit var btnStart: Button
     private var cycleRunning = false
+
+    @VisibleForTesting
+    var powerManagerOverride: PowerManager? = null
 
     private var pinVerified = false
     private val pinLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -125,7 +129,7 @@ class MainActivity : AppCompatActivity() {
             PermissionsDialogFragment().show(supportFragmentManager, "perm")
             return false
         }
-        val pm = getSystemService(PowerManager::class.java)
+        val pm = powerManagerOverride ?: getSystemService(PowerManager::class.java)
         if (pm != null && !pm.isIgnoringBatteryOptimizations(packageName)) {
             try {
                 startActivity(
