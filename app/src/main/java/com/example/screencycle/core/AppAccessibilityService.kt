@@ -12,11 +12,15 @@ class AppAccessibilityService : AccessibilityService() {
     private val settings by lazy { SettingsRepository(this) }
     private var inRest = false
     private var packages: Set<String> = emptySet()
+    private var categories: Set<String> = emptySet()
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event?.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
             val pkg = event.packageName?.toString() ?: return
-            if (inRest && packages.contains(pkg)) {
+            val category = runCatching {
+                packageManager.getApplicationInfo(pkg, 0).category
+            }.getOrNull()
+            if (inRest && (packages.contains(pkg) || (category != null && categories.contains(category.toString())))) {
                 performGlobalAction(GLOBAL_ACTION_HOME)
                 val intent = Intent(this, BlockActivity::class.java).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -42,7 +46,10 @@ class AppAccessibilityService : AccessibilityService() {
             stateReceiver,
             android.content.IntentFilter(CycleService.ACTION_STATE)
         )
-        scope.launch { packages = settings.getBlockedPackages() }
+        scope.launch {
+            packages = settings.getBlockedPackages()
+            categories = settings.getBlockedCategories()
+        }
     }
 
     override fun onDestroy() {

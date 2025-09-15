@@ -35,6 +35,13 @@ class SettingsRepository(private val context: Context) {
     suspend fun getBlockedPackages(): Set<String> =
         dataStore.data.map { it[BLOCKED_PACKAGES] ?: emptySet() }.first()
 
+    suspend fun setBlockedCategories(categories: Set<String>) {
+        dataStore.edit { it[BLOCKED_CATEGORIES] = categories }
+    }
+
+    suspend fun getBlockedCategories(): Set<String> =
+        dataStore.data.map { it[BLOCKED_CATEGORIES] ?: emptySet() }.first()
+
 
     suspend fun setPinHash(hash: String) {
         dataStore.edit { it[PIN_HASH] = hash }
@@ -48,6 +55,7 @@ class SettingsRepository(private val context: Context) {
         private val GAME_MINUTES = intPreferencesKey("game_minutes")
         private val REST_MINUTES = intPreferencesKey("rest_minutes")
         private val BLOCKED_PACKAGES = stringSetPreferencesKey("blocked_packages")
+        private val BLOCKED_CATEGORIES = stringSetPreferencesKey("blocked_categories")
         private val PIN_HASH = stringPreferencesKey("pin_hash")
     }
 }

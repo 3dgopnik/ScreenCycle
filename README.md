@@ -6,7 +6,7 @@
 - Set play/rest durations (defaults 30/30).
 - Select “game” apps to control.
 - Foreground service runs a PLAY/REST loop.
-- During REST, selected apps are blocked with a full-screen rest screen.
+- During REST, selected apps and categories are blocked with a full-screen rest screen.
 - Accessibility Service detects active app.
 - PIN-gated settings.
 - Main screen shows count of selected apps.
