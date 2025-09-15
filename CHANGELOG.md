@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Cycle starts only when required permissions are granted.
 - Start button toggles between "Working..." and "Stop" while the cycle runs.
 - Permissions dialog now handles battery optimization exemption; duplicate logic removed from `MainActivity`.
+- Refined instrumented tests to assert `PermissionsDialogFragment` visibility and verify service start/stop state via `ActivityScenario`.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
