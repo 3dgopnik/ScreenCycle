@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScreenCycle</string>
+    <string name="accessibility_description">Отслеживает активное приложение, чтобы блокировать игры во время отдыха</string>
+    <string name="rest_now">Сейчас отдых</string>
+    <string name="start">Старт</string>
+    <string name="stop">Стоп</string>
+    <string name="working">Запуск...</string>
+    <string name="select_games">Выбрать игры</string>
+    <string name="selected_games_none">Выбрано игр: 0</string>
+    <string name="selected_games_count">Выбрано игр: %1$d</string>
+    <string name="timer_initial">00:00</string>
+    <string name="timer_value">%1$s: %2$d:%3$02d</string>
+    <string name="play">Игра</string>
+    <string name="rest">Отдых</string>
+    <string name="play_minutes_hint">Минут игры (например, 30)</string>
+    <string name="rest_minutes_hint">Минут отдыха (например, 30)</string>
+    <string name="missing_overlay">Требуется разрешение поверх других окон.</string>
+    <string name="missing_usage_stats">Нужен доступ к статистике использования.</string>
+    <string name="missing_accessibility">Сервис доступности отключен.</string>
+    <string name="open_settings">Открыть настройки</string>
+    <string name="icon">иконка</string>
+    <string name="service_started">Запущено</string>
+</resources>

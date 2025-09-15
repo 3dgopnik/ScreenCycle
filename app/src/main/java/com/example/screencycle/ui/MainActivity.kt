@@ -1,27 +1,23 @@
 package com.example.screencycle.ui
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.ActivityManager
-import android.app.AppOpsManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
-import android.os.Process
+import android.os.PowerManager
 import android.provider.Settings
-import android.view.accessibility.AccessibilityManager
 import android.widget.Button
 import android.widget.TextView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.google.android.material.textfield.TextInputEditText
 import com.example.screencycle.R
-import com.example.screencycle.core.AppAccessibilityService
 import com.example.screencycle.core.CycleService
+import com.example.screencycle.core.Permissions
 import com.example.screencycle.core.SettingsRepository
 import kotlinx.coroutines.launch
 
@@ -39,8 +35,8 @@ class MainActivity : AppCompatActivity() {
                 val remaining = intent.getLongExtra(CycleService.EXTRA_REMAINING, 0L)
                 val m = remaining / 60_000
                 val s = (remaining / 1000) % 60
-                val label = if (rest) "Отдых" else "Игра"
-                tvTimer.text = "$label: $m:${"%02d".format(s)}"
+                val label = if (rest) getString(R.string.rest) else getString(R.string.play)
+                tvTimer.text = getString(R.string.timer_value, label, m, s)
             }
         }
     }
@@ -68,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         btnStart.setOnClickListener {
             if (cycleRunning) {
                 stopService(Intent(this, CycleService::class.java))
-                btnStart.text = "Start"
+                btnStart.text = getString(R.string.start)
                 cycleRunning = false
             } else {
                 val p = etPlay.text?.toString()?.toIntOrNull() ?: 30
@@ -78,9 +74,9 @@ class MainActivity : AppCompatActivity() {
                     settings.setRestMinutes(r)
                 }
                 if (ensurePermissions()) {
-                    btnStart.text = "Working..."
+                    btnStart.text = getString(R.string.working)
                     startForegroundService(Intent(this, CycleService::class.java).setAction(CycleService.ACTION_START))
-                    btnStart.text = "Stop"
+                    btnStart.text = getString(R.string.stop)
                     cycleRunning = true
                 }
             }
@@ -90,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         cycleRunning = isCycleServiceRunning()
-        btnStart.text = if (cycleRunning) "Stop" else "Start"
+        btnStart.text = if (cycleRunning) getString(R.string.stop) else getString(R.string.start)
         LocalBroadcastManager.getInstance(this).registerReceiver(
             stateReceiver,
             IntentFilter(CycleService.ACTION_STATE)
@@ -101,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         lifecycleScope.launch {
             val count = settings.getBlockedPackages().size
-            tvPackageCount.text = "Выбрано игр: $count"
+            tvPackageCount.text = getString(R.string.selected_games_count, count)
         }
     }
 
@@ -111,42 +107,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun ensurePermissions(): Boolean {
-        var ok = true
-        if (!Settings.canDrawOverlays(this)) {
-            val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-            startActivity(i)
-            ok = false
+        if (!Permissions.allGranted(this)) {
+            PermissionsDialogFragment().show(supportFragmentManager, "perm")
+            return false
         }
-        if (!hasUsageStats()) {
-            try { startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) } catch (_: Exception) {}
-            ok = false
+        val pm = getSystemService(PowerManager::class.java)
+        if (pm != null && !pm.isIgnoringBatteryOptimizations(packageName)) {
+            try {
+                startActivity(
+                    Intent(
+                        Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                        Uri.parse("package:$packageName")
+                    )
+                )
+            } catch (_: Exception) {}
+            return false
         }
-        if (!isAccessibilityEnabled()) {
-            MaterialAlertDialogBuilder(this)
-                .setMessage("Accessibility service is disabled")
-                .setPositiveButton("Enable now") { _, _ ->
-                    try { startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) } catch (_: Exception) {}
-                }
-                .setNegativeButton("Later", null)
-                .show()
-            ok = false
-        }
-        return ok
-    }
-
-    private fun hasUsageStats(): Boolean {
-        val appOps = getSystemService(AppOpsManager::class.java) ?: return false
-        val mode = appOps.unsafeCheckOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, Process.myUid(), packageName)
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
-
-    private fun isAccessibilityEnabled(): Boolean {
-        val am = getSystemService(AccessibilityManager::class.java) ?: return false
-        val enabled = am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
-        return enabled.any {
-            it.resolveInfo.serviceInfo.packageName == packageName &&
-                it.resolveInfo.serviceInfo.name == AppAccessibilityService::class.java.name
-        }
+        return true
     }
 
     private fun isCycleServiceRunning(): Boolean {

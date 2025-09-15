@@ -17,3 +17,4 @@
 - Add diagram illustrating play/rest cycle in CONCEPT.md.
 - Implement PIN protection for settings configuration.
 - Allow changing cycle durations directly from the notification.
+- Integrate battery optimization check into permissions dialog.

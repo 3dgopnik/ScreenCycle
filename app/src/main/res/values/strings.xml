@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">ScreenCycle</string>
     <string name="accessibility_description">Track active app to block games during REST</string>
-    <string name="rest_now">Сейчас отдых</string>
+    <string name="rest_now">Rest now</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="working">Working...</string>
+    <string name="select_games">Select games</string>
+    <string name="selected_games_none">Selected games: 0</string>
+    <string name="selected_games_count">Selected games: %1$d</string>
+    <string name="timer_initial">00:00</string>
+    <string name="timer_value">%1$s: %2$d:%3$02d</string>
+    <string name="play">Play</string>
+    <string name="rest">Rest</string>
+    <string name="play_minutes_hint">Play minutes (e.g., 30)</string>
+    <string name="rest_minutes_hint">Rest minutes (e.g., 30)</string>
+    <string name="missing_overlay">Overlay permission is required.</string>
+    <string name="missing_usage_stats">Usage access is required.</string>
+    <string name="missing_accessibility">Accessibility service is disabled.</string>
+    <string name="open_settings">Open settings</string>
+    <string name="icon">icon</string>
+    <string name="service_started">Running</string>
 </resources>
