@@ -21,6 +21,9 @@
         <activity android:name=".ui.BlockActivity" />
         <activity android:name=".ui.AppSelectionActivity" />
         <activity
+            android:name=".ui.PermissionsActivity"
+            android:label="@string/permissions_title" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

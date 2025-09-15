@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Refined instrumented tests to assert `PermissionsDialogFragment` visibility and verify service start/stop state via `ActivityScenario`.
 - Finalized adaptive launcher icons and moved them to mipmap resources.
 - Updated Russian translations for accessibility description and battery optimization dialog.
+- Consolidated permissions into a single screen listing all missing requirements.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
