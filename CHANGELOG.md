@@ -46,6 +46,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Removed deprecated `TYPE_PHONE` overlay window type.
 - Start button now detects running cycle on app return and shows **Stop**.
 - Use `getEnabledAccessibilityServiceList` to query enabled accessibility services.
+- Declared `SYSTEM_ALERT_WINDOW` permission so the app appears in overlay settings.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
