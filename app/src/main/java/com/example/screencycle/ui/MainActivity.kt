@@ -5,10 +5,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
-import android.provider.Settings
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -125,20 +123,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun ensurePermissions(): Boolean {
-        if (!Permissions.allGranted(this)) {
-            PermissionsDialogFragment().show(supportFragmentManager, "perm")
-            return false
-        }
         val pm = powerManagerOverride ?: getSystemService(PowerManager::class.java)
-        if (pm != null && !pm.isIgnoringBatteryOptimizations(packageName)) {
-            try {
-                startActivity(
-                    Intent(
-                        Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                        Uri.parse("package:$packageName")
-                    )
-                )
-            } catch (_: Exception) {}
+        if (
+            !Permissions.allGranted(this) ||
+            (pm != null && !pm.isIgnoringBatteryOptimizations(packageName))
+        ) {
+            PermissionsDialogFragment().show(supportFragmentManager, "perm")
             return false
         }
         return true

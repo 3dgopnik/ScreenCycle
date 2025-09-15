@@ -59,11 +59,33 @@ class MainActivityTest {
         every { Permissions.canDrawOverlays(any()) } returns false
         every { Permissions.hasUsageStats(any()) } returns true
         every { Permissions.isAccessibilityEnabled(any()) } returns true
+        val pm = mockk<PowerManager>()
+        every { pm.isIgnoringBatteryOptimizations(any()) } returns true
 
-        ActivityScenario.launch(MainActivity::class.java).use {
+        ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+            scenario.onActivity { it.powerManagerOverride = pm }
             enterPin()
             onView(withId(R.id.btnStart)).perform(click())
             onView(withText(R.string.missing_overlay)).check(matches(isDisplayed()))
+        }
+    }
+
+    @Test
+    fun batteryOptimization_showsDialog() {
+        mockkObject(Permissions)
+        every { Permissions.allGranted(any()) } returns true
+        every { Permissions.canDrawOverlays(any()) } returns true
+        every { Permissions.hasUsageStats(any()) } returns true
+        every { Permissions.isAccessibilityEnabled(any()) } returns true
+
+        val pm = mockk<PowerManager>()
+        every { pm.isIgnoringBatteryOptimizations(any()) } returns false
+
+        ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+            scenario.onActivity { it.powerManagerOverride = pm }
+            enterPin()
+            onView(withId(R.id.btnStart)).perform(click())
+            onView(withText(R.string.missing_battery_optimization)).check(matches(isDisplayed()))
         }
     }
 
