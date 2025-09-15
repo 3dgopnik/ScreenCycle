@@ -32,5 +32,11 @@
     <string name="confirm">Готово</string>
     <string name="permissions_title">Выдайте необходимые разрешения</string>
     <string name="category_game">Игры</string>
+    <string name="category_audio">Аудио</string>
+    <string name="category_video">Видео</string>
+    <string name="category_image">Изображения</string>
     <string name="category_social">Социальные</string>
+    <string name="category_news">Новости</string>
+    <string name="category_maps">Карты</string>
+    <string name="category_productivity">Продуктивность</string>
 </resources>
