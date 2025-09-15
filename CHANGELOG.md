@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
 - Dialog prompting to enable accessibility service when disabled.
+- Localization unit test ensuring Russian strings match the default locale.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
@@ -30,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Permissions dialog now handles battery optimization exemption; duplicate logic removed from `MainActivity`.
 - Refined instrumented tests to assert `PermissionsDialogFragment` visibility and verify service start/stop state via `ActivityScenario`.
 - Finalized adaptive launcher icons and moved them to mipmap resources.
+- Updated Russian translations for accessibility description and battery optimization dialog.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
