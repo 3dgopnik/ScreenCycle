@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added combined app and category blocking during rest.
 - Added main screen counter showing number of selected apps.
 - Added main screen button to select categories and counters for selected categories and apps.
+- Added string resources and dynamic listing for all standard app categories.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
 - Dialog prompting to enable accessibility service when disabled.
@@ -72,3 +73,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added references to UI screenshots and a play/rest flow diagram.
 - Documented category blocking in README and docs index.
 - Documented category selection screen in the UI guide.
+- Expanded UI guide to mention all standard categories.

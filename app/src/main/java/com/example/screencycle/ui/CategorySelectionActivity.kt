@@ -13,16 +13,14 @@ import kotlinx.coroutines.launch
 class CategorySelectionActivity : AppCompatActivity() {
     private val settings by lazy { SettingsRepository(this) }
     private lateinit var listView: ListView
-    private val categories = listOf(
-        ApplicationInfo.CATEGORY_GAME to R.string.category_game,
-        ApplicationInfo.CATEGORY_SOCIAL to R.string.category_social
-    )
+    private lateinit var categories: List<Pair<Int, Int>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_selection)
         listView = findViewById(R.id.categories_list)
         listView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+        categories = buildCategories()
 
         lifecycleScope.launch {
             val selected = settings.getBlockedCategories().toMutableSet()
@@ -45,5 +43,19 @@ class CategorySelectionActivity : AppCompatActivity() {
                 lifecycleScope.launch { settings.setBlockedCategories(selected) }
             }
         }
+    }
+
+    private fun buildCategories(): List<Pair<Int, Int>> {
+        val fields = ApplicationInfo::class.java.fields
+        return fields.mapNotNull { field ->
+            if (field.name.startsWith("CATEGORY_")) {
+                val value = field.getInt(null)
+                val resName = "category_${field.name.removePrefix("CATEGORY_").lowercase()}"
+                val resId = resources.getIdentifier(resName, "string", packageName)
+                if (resId != 0) value to resId else null
+            } else {
+                null
+            }
+        }.sortedBy { it.first }
     }
 }
