@@ -28,4 +28,6 @@
     <string name="pin_invalid">Invalid PIN</string>
     <string name="confirm">Confirm</string>
     <string name="permissions_title">Grant required permissions</string>
+    <string name="category_game">Game</string>
+    <string name="category_social">Social</string>
 </resources>

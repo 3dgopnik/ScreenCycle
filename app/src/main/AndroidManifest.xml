@@ -20,6 +20,7 @@
         <activity android:name=".ui.PinActivity" />
         <activity android:name=".ui.BlockActivity" />
         <activity android:name=".ui.AppSelectionActivity" />
+        <activity android:name=".ui.CategorySelectionActivity" />
         <activity
             android:name=".ui.PermissionsActivity"
             android:label="@string/permissions_title" />
