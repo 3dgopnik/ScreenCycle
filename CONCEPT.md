@@ -3,6 +3,13 @@
 ## Idea
 Split Family Link’s allowed windows into child-friendly cycles: PLAY for N minutes → REST for M minutes, repeating until the daily budget is consumed or the sleep window starts.
 
+```mermaid
+flowchart LR
+    start((Start)) --> play[PLAY \n for N minutes]
+    play --> rest[REST \n for M minutes]
+    rest --> play
+```
+
 ## Architecture (MVP)
 - `CycleService` — foreground service that toggles PLAY/REST and broadcasts state.
 - `AppAccessibilityService` — watches current foreground app.
@@ -25,6 +32,13 @@ No public API for Family Link → Co-Pilot mode infers availability via device s
 ## Идея
 Разделяет разрешённые Family Link окна на дружелюбные к ребёнку циклы: ИГРА N минут → ОТДЫХ M минут, повторяя до исчерпания дневного бюджета или начала окна сна.
 
+```mermaid
+flowchart LR
+    start((Старт)) --> play[ИГРА \n N минут]
+    play --> rest[ОТДЫХ \n M минут]
+    rest --> play
+```
+
 ## Архитектура (MVP)
 - `CycleService` — foreground-служба, переключающая ИГРУ/ОТДЫХ и транслирующая состояние.
 - `AppAccessibilityService` — отслеживает текущее активное приложение.
@@ -39,3 +53,8 @@ No public API for Family Link → Co-Pilot mode infers availability via device s
 
 ## Ограничения
 Нет публичного API для Family Link → режим Со-пилота определяет доступность по состоянию устройства; он никогда не расширяет доступ, а только ужесточает его внутри окон Family Link.
+
+## Screenshots
+![PIN screen](docs/assets/pin-screen.png)
+![Main screen](docs/assets/home-screen.png)
+![Rest screen](docs/assets/rest-screen.png)

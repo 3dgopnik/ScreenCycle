@@ -62,3 +62,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documented permissions dialog and battery optimization request in quickstart and UI guide.
 - Clarified battery optimization handling in quickstart and UI guide.
 - Introduced permissions dialog guiding overlay, usage access, accessibility and battery optimization exemption.
+- Added references to UI screenshots and a play/rest flow diagram.
