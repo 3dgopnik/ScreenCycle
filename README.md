@@ -11,6 +11,7 @@
 - PIN-gated settings.
 - Main screen shows count of selected apps.
 - Main screen displays remaining time in the current phase.
+- Guides user to grant overlay, usage access, accessibility permissions and request battery optimization exemption.
 
 ## Co-Pilot to Family Link (concept)
 - Respect Family Link windows (study/sleep). Work **only** inside allowed windows.

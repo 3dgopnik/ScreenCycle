@@ -53,3 +53,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
  - Updated roadmap statuses for MVP features.
 - Documented cycle timer on the main screen.
 - Added UI guide section for start/stop button and noted permission dialog in quickstart.
+- Documented permissions dialog and battery optimization request in quickstart and UI guide.
+- Introduced permissions dialog guiding overlay, usage access, accessibility and battery optimization exemption.

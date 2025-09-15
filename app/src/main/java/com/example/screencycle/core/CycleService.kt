@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.screencycle.R
 import kotlinx.coroutines.*
 
 class CycleService : Service() {
@@ -30,7 +31,7 @@ class CycleService : Service() {
     override fun onCreate() {
         super.onCreate()
         createChannel()
-        startForeground(1, notification("Запущено"))
+        startForeground(1, notification(getString(R.string.service_started)))
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -59,11 +60,11 @@ class CycleService : Service() {
 
     private suspend fun runPhase(rest: Boolean, minutes: Int) {
         var remaining = minutes * 60_000L
-        val label = if (rest) "Отдых" else "Игра"
+        val label = if (rest) getString(R.string.rest) else getString(R.string.play)
         while (running && remaining > 0) {
             val m = remaining / 60_000
             val s = (remaining / 1000) % 60
-            updateNotif("$label: $m:${"%02d".format(s)}")
+            updateNotif(getString(R.string.timer_value, label, m, s))
             sendState(rest, remaining)
             delay(1_000)
             remaining -= 1_000
@@ -80,7 +81,7 @@ class CycleService : Service() {
 
     private fun notification(text: String): Notification =
         NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("ScreenCycle")
+            .setContentTitle(getString(R.string.app_name))
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setOngoing(true)
@@ -94,7 +95,13 @@ class CycleService : Service() {
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nm.createNotificationChannel(NotificationChannel(CHANNEL_ID, "ScreenCycle", NotificationManager.IMPORTANCE_LOW))
+            nm.createNotificationChannel(
+                NotificationChannel(
+                    CHANNEL_ID,
+                    getString(R.string.app_name),
+                    NotificationManager.IMPORTANCE_LOW
+                )
+            )
         }
     }
 

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Минут игры (например, 30)"/>
+            android:hint="@string/play_minutes_hint"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -32,14 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="Минут отдыха (например, 30)"/>
+            android:hint="@string/rest_minutes_hint"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnApps"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Выбрать игры"
+        android:text="@string/select_games"
         app:layout_constraintTop_toBottomOf="@+id/tilRest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:id="@+id/tvPackageCount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Выбрано игр: 0"
+        android:text="@string/selected_games_none"
         app:layout_constraintTop_toBottomOf="@+id/btnApps"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
         android:id="@+id/tvTimer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="00:00"
+        android:text="@string/timer_initial"
         app:layout_constraintTop_toBottomOf="@+id/tvPackageCount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:id="@+id/btnStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Start"
+        android:text="@string/start"
         app:layout_constraintTop_toBottomOf="@+id/tvTimer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
