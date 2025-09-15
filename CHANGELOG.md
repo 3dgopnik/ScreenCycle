@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Introduced day/night theme and color palette.
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
 - Added instrumented test to verify `MainActivity` launches without exceptions.
+- Added instrumented tests for permission dialog and service start/stop.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added main screen counter showing number of selected apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
