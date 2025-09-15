@@ -9,6 +9,9 @@
     <string name="select_games">Select games</string>
     <string name="selected_games_none">Selected games: 0</string>
     <string name="selected_games_count">Selected games: %1$d</string>
+    <string name="select_categories">Select categories</string>
+    <string name="selected_categories_none">Selected categories: 0</string>
+    <string name="selected_categories_count">Selected categories: %1$d</string>
     <string name="timer_initial">00:00</string>
     <string name="timer_value">%1$s: %2$d:%3$02d</string>
     <string name="play">Play</string>

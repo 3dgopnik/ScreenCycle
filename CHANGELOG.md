@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added support for blocking app categories alongside packages.
 - Added screen to select app categories for blocking.
 - Added main screen counter showing number of selected apps.
+- Added main screen button to select categories and counters for selected categories and apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
 - Dialog prompting to enable accessibility service when disabled.
