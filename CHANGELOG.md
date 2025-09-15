@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Introduced `BlockActivity` to display a full-screen rest screen.
 - Dialog prompting to enable accessibility service when disabled.
 - Localization unit test ensuring Russian strings match the default locale.
+- Added permission to request ignoring battery optimizations.
 
 ### Changed
 - Removed `package` attribute from manifest and marked `MainActivity` as exported.
