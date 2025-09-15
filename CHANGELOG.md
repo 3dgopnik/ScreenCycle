@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added instrumented tests for permission dialog and service start/stop.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added support for blocking app categories alongside packages.
+- Added screen to select app categories for blocking.
 - Added main screen counter showing number of selected apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
@@ -68,3 +69,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Introduced permissions dialog guiding overlay, usage access, accessibility and battery optimization exemption.
 - Added references to UI screenshots and a play/rest flow diagram.
 - Documented category blocking in README and docs index.
+- Documented category selection screen in the UI guide.
