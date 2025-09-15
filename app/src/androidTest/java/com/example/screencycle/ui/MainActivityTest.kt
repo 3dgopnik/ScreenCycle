@@ -53,7 +53,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun missingPermissions_showsDialog() {
+    fun missingPermissions_showsDialogFragment() {
         mockkObject(Permissions)
         every { Permissions.allGranted(any()) } returns false
         every { Permissions.canDrawOverlays(any()) } returns false
@@ -66,7 +66,10 @@ class MainActivityTest {
             scenario.onActivity { it.powerManagerOverride = pm }
             enterPin()
             onView(withId(R.id.btnStart)).perform(click())
-            onView(withText(R.string.missing_overlay)).check(matches(isDisplayed()))
+            scenario.onActivity {
+                val frag = it.supportFragmentManager.findFragmentByTag("perm")
+                assertTrue(frag is PermissionsDialogFragment)
+            }
         }
     }
 
@@ -104,22 +107,23 @@ class MainActivityTest {
             scenario.onActivity { it.powerManagerOverride = pm }
             enterPin()
             onView(withId(R.id.btnStart)).perform(click())
-            assertTrue(isServiceRunning())
+            scenario.onActivity { activity ->
+                val am = activity.getSystemService(ActivityManager::class.java)
+                val services = am.getRunningServices(Int.MAX_VALUE)
+                assertTrue(services.any { it.service.className == CycleService::class.java.name })
+            }
             onView(withId(R.id.btnStart)).perform(click())
-            assertFalse(isServiceRunning())
+            scenario.onActivity { activity ->
+                val am = activity.getSystemService(ActivityManager::class.java)
+                val services = am.getRunningServices(Int.MAX_VALUE)
+                assertFalse(services.any { it.service.className == CycleService::class.java.name })
+            }
         }
     }
 
     private fun enterPin() {
         onView(withId(R.id.etPin)).perform(typeText("1234"), closeSoftKeyboard())
         onView(withId(R.id.btnPinOk)).perform(click())
-    }
-
-    private fun isServiceRunning(): Boolean {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        val am = context.getSystemService(ActivityManager::class.java)
-        val services = am.getRunningServices(Int.MAX_VALUE)
-        return services.any { it.service.className == CycleService::class.java.name }
     }
 
     private fun hash(pin: String): String {
