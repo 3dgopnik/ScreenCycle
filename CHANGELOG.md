@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added support for blocking app categories alongside packages.
 - Added screen to select app categories for blocking.
+- Added combined app and category blocking during rest.
 - Added main screen counter showing number of selected apps.
 - Added main screen button to select categories and counters for selected categories and apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
