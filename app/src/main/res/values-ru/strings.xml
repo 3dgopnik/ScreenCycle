@@ -21,4 +21,9 @@
     <string name="open_settings">Открыть настройки</string>
     <string name="icon">иконка</string>
     <string name="service_started">Запущено</string>
+    <string name="enter_pin">Введите PIN</string>
+    <string name="confirm_pin">Повторите PIN</string>
+    <string name="pin_mismatch">PIN не совпадает</string>
+    <string name="pin_invalid">Неверный PIN</string>
+    <string name="confirm">Готово</string>
 </resources>

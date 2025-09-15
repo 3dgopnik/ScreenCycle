@@ -21,4 +21,9 @@
     <string name="open_settings">Open settings</string>
     <string name="icon">icon</string>
     <string name="service_started">Running</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="pin_mismatch">PINs do not match</string>
+    <string name="pin_invalid">Invalid PIN</string>
+    <string name="confirm">Confirm</string>
 </resources>

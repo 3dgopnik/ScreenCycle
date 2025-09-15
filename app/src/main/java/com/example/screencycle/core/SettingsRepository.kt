@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -34,10 +35,19 @@ class SettingsRepository(private val context: Context) {
     suspend fun getBlockedPackages(): Set<String> =
         dataStore.data.map { it[BLOCKED_PACKAGES] ?: emptySet() }.first()
 
+
+    suspend fun setPinHash(hash: String) {
+        dataStore.edit { it[PIN_HASH] = hash }
+    }
+
+    suspend fun getPinHash(): String? =
+        dataStore.data.map { it[PIN_HASH] }.first()
+
     companion object {
         private val Context.dataStore by preferencesDataStore(name = "settings")
         private val GAME_MINUTES = intPreferencesKey("game_minutes")
         private val REST_MINUTES = intPreferencesKey("rest_minutes")
         private val BLOCKED_PACKAGES = stringSetPreferencesKey("blocked_packages")
+        private val PIN_HASH = stringPreferencesKey("pin_hash")
     }
 }

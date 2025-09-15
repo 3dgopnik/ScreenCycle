@@ -31,4 +31,4 @@ Open in **Android Studio** (Arctic Fox or newer).
 - [User manual](docs/index.md)
 - [Quickstart](docs/quickstart.md)
 
-> This is an MVP scaffold. Hardening, PIN lock, and full Co-Pilot logic will be added in subsequent commits.
+> This is an MVP scaffold. Hardening and full Co-Pilot logic will be added in subsequent commits.
