@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 - Added PIN screen requiring verification before accessing settings.
 - Added `gradle.properties` enabling AndroidX and Jetifier.
-- Added placeholder adaptive launcher icons.
 - Introduced day/night theme and color palette.
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
 - Added instrumented test to verify `MainActivity` launches without exceptions.
@@ -30,6 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Start button toggles between "Working..." and "Stop" while the cycle runs.
 - Permissions dialog now handles battery optimization exemption; duplicate logic removed from `MainActivity`.
 - Refined instrumented tests to assert `PermissionsDialogFragment` visibility and verify service start/stop state via `ActivityScenario`.
+- Finalized adaptive launcher icons and moved them to mipmap resources.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
