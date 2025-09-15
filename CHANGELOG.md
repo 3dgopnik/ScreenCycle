@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added instrumented test to verify `MainActivity` launches without exceptions.
 - Added instrumented tests for permission dialog and service start/stop.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
+- Added support for blocking app categories alongside packages.
 - Added main screen counter showing number of selected apps.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
@@ -26,7 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Switched app theme to inherit from `Theme.MaterialComponents.DayNight.NoActionBar`.
 - Replaced `Prefs` usage in activities and services with `SettingsRepository`.
 - Replaced global broadcasts with `LocalBroadcastManager`.
-- `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages.
+- `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages or categories.
 - Cycle starts only when required permissions are granted.
 - Start button toggles between "Working..." and "Stop" while the cycle runs.
 - Permissions dialog now handles battery optimization exemption; duplicate logic removed from `MainActivity`.
@@ -66,3 +67,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Clarified battery optimization handling in quickstart and UI guide.
 - Introduced permissions dialog guiding overlay, usage access, accessibility and battery optimization exemption.
 - Added references to UI screenshots and a play/rest flow diagram.
+- Documented category blocking in README and docs index.
