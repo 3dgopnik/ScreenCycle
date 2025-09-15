@@ -53,7 +53,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun missingPermissions_showsDialogFragment() {
+    fun missingPermissions_opensPermissionsScreen() {
         mockkObject(Permissions)
         every { Permissions.allGranted(any()) } returns false
         every { Permissions.canDrawOverlays(any()) } returns false
@@ -66,15 +66,12 @@ class MainActivityTest {
             scenario.onActivity { it.powerManagerOverride = pm }
             enterPin()
             onView(withId(R.id.btnStart)).perform(click())
-            scenario.onActivity {
-                val frag = it.supportFragmentManager.findFragmentByTag("perm")
-                assertTrue(frag is PermissionsDialogFragment)
-            }
+            onView(withId(R.id.permissions_list)).check(matches(isDisplayed()))
         }
     }
 
     @Test
-    fun batteryOptimization_showsDialog() {
+    fun batteryOptimization_listsMissing() {
         mockkObject(Permissions)
         every { Permissions.allGranted(any()) } returns true
         every { Permissions.canDrawOverlays(any()) } returns true

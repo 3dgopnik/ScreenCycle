@@ -124,14 +124,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun ensurePermissions(): Boolean {
         val pm = powerManagerOverride ?: getSystemService(PowerManager::class.java)
-        if (
-            !Permissions.allGranted(this) ||
-            (pm != null && !pm.isIgnoringBatteryOptimizations(packageName))
-        ) {
-            PermissionsDialogFragment().show(supportFragmentManager, "perm")
-            return false
+        val missing = PermissionsActivity.collectMissingPermissions(this, pm)
+        return if (missing.isEmpty()) {
+            true
+        } else {
+            startActivity(Intent(this, PermissionsActivity::class.java))
+            false
         }
-        return true
     }
 
     private fun isCycleServiceRunning(): Boolean {
