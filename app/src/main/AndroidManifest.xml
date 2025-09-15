@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.ScreenCycle">
 
+        <activity android:name=".ui.PinActivity" />
         <activity android:name=".ui.BlockActivity" />
         <activity android:name=".ui.AppSelectionActivity" />
         <activity

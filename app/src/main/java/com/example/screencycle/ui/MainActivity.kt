@@ -11,6 +11,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -27,6 +28,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTimer: TextView
     private lateinit var btnStart: Button
     private var cycleRunning = false
+
+    private var pinVerified = false
+    private val pinLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            pinVerified = true
+        } else {
+            finish()
+        }
+    }
 
     private val stateReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -95,9 +105,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch {
-            val count = settings.getBlockedPackages().size
-            tvPackageCount.text = getString(R.string.selected_games_count, count)
+        if (!pinVerified) {
+            pinLauncher.launch(Intent(this, PinActivity::class.java))
+        } else {
+            lifecycleScope.launch {
+                val count = settings.getBlockedPackages().size
+                tvPackageCount.text = getString(R.string.selected_games_count, count)
+            }
         }
     }
 
