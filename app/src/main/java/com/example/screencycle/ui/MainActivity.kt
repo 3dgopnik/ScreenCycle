@@ -24,6 +24,7 @@ import androidx.annotation.VisibleForTesting
 class MainActivity : AppCompatActivity() {
     private val settings by lazy { SettingsRepository(this) }
     private lateinit var tvPackageCount: TextView
+    private lateinit var tvCategoryCount: TextView
     private lateinit var tvTimer: TextView
     private lateinit var btnStart: Button
     private var cycleRunning = false
@@ -60,8 +61,10 @@ class MainActivity : AppCompatActivity() {
         val etPlay = findViewById<TextInputEditText>(R.id.etPlay)
         val etRest = findViewById<TextInputEditText>(R.id.etRest)
         val btnApps = findViewById<Button>(R.id.btnApps)
+        val btnCategories = findViewById<Button>(R.id.btnCategories)
         btnStart = findViewById(R.id.btnStart)
         tvPackageCount = findViewById(R.id.tvPackageCount)
+        tvCategoryCount = findViewById(R.id.tvCategoryCount)
         tvTimer = findViewById(R.id.tvTimer)
 
         lifecycleScope.launch {
@@ -71,6 +74,10 @@ class MainActivity : AppCompatActivity() {
 
         btnApps.setOnClickListener {
             startActivity(Intent(this, AppSelectionActivity::class.java))
+        }
+
+        btnCategories.setOnClickListener {
+            startActivity(Intent(this, CategorySelectionActivity::class.java))
         }
 
         btnStart.setOnClickListener {
@@ -111,8 +118,10 @@ class MainActivity : AppCompatActivity() {
             pinLauncher.launch(Intent(this, PinActivity::class.java))
         } else {
             lifecycleScope.launch {
-                val count = settings.getBlockedPackages().size
-                tvPackageCount.text = getString(R.string.selected_games_count, count)
+                val packages = settings.getBlockedPackages().size
+                val categories = settings.getBlockedCategories().size
+                tvPackageCount.text = getString(R.string.selected_games_count, packages)
+                tvCategoryCount.text = getString(R.string.selected_categories_count, categories)
             }
         }
     }

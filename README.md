@@ -5,11 +5,12 @@
 ## MVP (v0.1)
 - Set play/rest durations (defaults 30/30).
 - Select “game” apps to control.
+- Select app categories to control.
 - Foreground service runs a PLAY/REST loop.
 - During REST, selected apps and categories are blocked with a full-screen rest screen.
 - Accessibility Service detects active app.
 - PIN-gated settings.
-- Main screen shows count of selected apps.
+- Main screen shows counts of selected apps and categories.
 - Main screen displays remaining time in the current phase.
 - Guides user to grant overlay, usage access, accessibility permissions and request battery optimization exemption.
 
