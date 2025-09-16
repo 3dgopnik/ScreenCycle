@@ -16,6 +16,11 @@
     <string name="timer_value">%1$s: %2$d:%3$02d</string>
     <string name="play">Play</string>
     <string name="rest">Rest</string>
+    <string name="increase_play">Play +</string>
+    <string name="decrease_play">Play -</string>
+    <string name="increase_rest">Rest +</string>
+    <string name="decrease_rest">Rest -</string>
+    <string name="notification_duration_summary">Play %1$d min • Rest %2$d min</string>
     <string name="play_minutes_hint">Play minutes (e.g., 30)</string>
     <string name="rest_minutes_hint">Rest minutes (e.g., 30)</string>
     <string name="configure_rest">Customize rest screen</string>

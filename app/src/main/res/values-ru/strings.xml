@@ -16,6 +16,11 @@
     <string name="timer_value">%1$s: %2$d:%3$02d</string>
     <string name="play">Игра</string>
     <string name="rest">Отдых</string>
+    <string name="increase_play">Игра +</string>
+    <string name="decrease_play">Игра -</string>
+    <string name="increase_rest">Отдых +</string>
+    <string name="decrease_rest">Отдых -</string>
+    <string name="notification_duration_summary">Игра %1$d мин • Отдых %2$d мин</string>
     <string name="play_minutes_hint">Минуты игры (например, 30)</string>
     <string name="rest_minutes_hint">Минуты отдыха (например, 30)</string>
     <string name="configure_rest">Настроить экран отдыха</string>
