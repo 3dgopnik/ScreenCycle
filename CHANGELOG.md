@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 ### Added
 - Declared package visibility permission and launcher queries to support app selection screen.
+- Added search field to filter applications on the selection screen in real time.
 - Added notification controls to adjust play and rest durations with instant updates and safe limits.
 - Added complete Russian localization for user-facing strings and accessibility copy.
 - Added PIN screen requiring verification before accessing settings.
