@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/blockRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
     <TextView
+        android:id="@+id/tvRestMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorOnBackground"
         android:text="@string/rest_now"
         android:textSize="24sp"
-        android:textColor="@color/colorOnBackground"
         android:layout_gravity="center" />
 </FrameLayout>

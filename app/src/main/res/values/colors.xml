@@ -22,4 +22,10 @@
     <color name="colorSurfaceVariant">#E7E0EC</color>
     <color name="colorOnSurfaceVariant">#49454F</color>
     <color name="colorOutline">#79747E</color>
+    <color name="rest_theme_default_background">@color/colorBackground</color>
+    <color name="rest_theme_default_text">@color/colorOnBackground</color>
+    <color name="rest_theme_forest_background">#1B5E20</color>
+    <color name="rest_theme_forest_text">#E8F5E9</color>
+    <color name="rest_theme_sunset_background">#BF360C</color>
+    <color name="rest_theme_sunset_text">#FFE0B2</color>
 </resources>
