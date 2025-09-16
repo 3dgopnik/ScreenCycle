@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 ### Added
+- Declared package visibility permission and launcher queries to support app selection screen.
 - Added notification controls to adjust play and rest durations with instant updates and safe limits.
 - Added complete Russian localization for user-facing strings and accessibility copy.
 - Added PIN screen requiring verification before accessing settings.
@@ -62,6 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Excluded `/META-INF/LICENSE.md` from packaging to prevent resource merge conflicts during tests.
 
 ### Docs
+- Documented troubleshooting steps for package visibility permission.
 - Added user manual skeleton with build and run instructions and linked docs from README.
 - Documented AndroidX and Jetifier build requirements.
 - Added troubleshooting note about `android:exported` requirement on Android 12+.
