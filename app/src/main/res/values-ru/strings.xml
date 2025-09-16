@@ -18,6 +18,14 @@
     <string name="rest">Отдых</string>
     <string name="play_minutes_hint">Минуты игры (например, 30)</string>
     <string name="rest_minutes_hint">Минуты отдыха (например, 30)</string>
+    <string name="configure_rest">Настроить экран отдыха</string>
+    <string name="rest_settings_title">Настройки экрана отдыха</string>
+    <string name="rest_message_hint">Текст напоминания (например, Сделайте разминку!)</string>
+    <string name="rest_theme_default">Спокойный свет</string>
+    <string name="rest_theme_forest">Лесной вечер</string>
+    <string name="rest_theme_sunset">Закатное сияние</string>
+    <string name="rest_theme_label">Цветовая палитра</string>
+    <string name="save">Сохранить</string>
     <string name="missing_overlay">Требуется разрешение на отображение поверх других приложений.</string>
     <string name="missing_usage_stats">Требуется доступ к статистике использования.</string>
     <string name="missing_accessibility">Служба доступности отключена.</string>

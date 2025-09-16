@@ -8,11 +8,15 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.os.PowerManager
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.example.screencycle.R
 import com.example.screencycle.core.CycleService
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         val etRest = findViewById<TextInputEditText>(R.id.etRest)
         val btnApps = findViewById<Button>(R.id.btnApps)
         val btnCategories = findViewById<Button>(R.id.btnCategories)
+        val btnRestSettings = findViewById<Button>(R.id.btnRestSettings)
         btnStart = findViewById(R.id.btnStart)
         tvPackageCount = findViewById(R.id.tvPackageCount)
         tvCategoryCount = findViewById(R.id.tvCategoryCount)
@@ -78,6 +83,10 @@ class MainActivity : AppCompatActivity() {
 
         btnCategories.setOnClickListener {
             startActivity(Intent(this, CategorySelectionActivity::class.java))
+        }
+
+        btnRestSettings.setOnClickListener {
+            showRestSettingsDialog()
         }
 
         btnStart.setOnClickListener {
@@ -100,6 +109,40 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showRestSettingsDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_rest_settings, null)
+        val messageInput = dialogView.findViewById<TextInputEditText>(R.id.etRestMessage)
+        val themeGroup = dialogView.findViewById<RadioGroup>(R.id.rgRestThemes)
+        themeGroup.check(R.id.rbRestThemeDefault)
+
+        lifecycleScope.launch {
+            val currentMessage = settings.getRestMessage()
+            val currentTheme = settings.getRestTheme()
+            messageInput.setText(currentMessage)
+            val selected = themeGroup.children
+                .filterIsInstance<RadioButton>()
+                .firstOrNull { it.tag == currentTheme }
+            selected?.let { themeGroup.check(it.id) }
+        }
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.rest_settings_title)
+            .setView(dialogView)
+            .setPositiveButton(R.string.save) { _, _ ->
+                val message = messageInput.text?.toString()?.trim().takeUnless { it.isNullOrEmpty() }
+                    ?: getString(R.string.rest_now)
+                val checkedId = themeGroup.checkedRadioButtonId
+                val selectedTheme = dialogView.findViewById<RadioButton>(checkedId)?.tag as? String
+                    ?: RestTheme.DEFAULT.key
+                lifecycleScope.launch {
+                    settings.setRestMessage(message)
+                    settings.setRestTheme(selectedTheme)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     override fun onStart() {

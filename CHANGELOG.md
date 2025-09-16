@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added string resources and dynamic listing for all standard app categories.
 - Cycle service now broadcasts remaining time every second and updates notification and UI.
 - Introduced `BlockActivity` to display a full-screen rest screen.
+- Rest screen message and color palette can now be customized from settings.
 - Dialog prompting to enable accessibility service when disabled.
 - Localization unit test ensuring Russian strings match the default locale.
 - Added permission to request ignoring battery optimizations.
@@ -78,3 +79,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documented category blocking in README and docs index.
 - Documented category selection screen in the UI guide.
 - Expanded UI guide to mention all standard categories.
+- Added UI guide section covering rest screen customization dialog.

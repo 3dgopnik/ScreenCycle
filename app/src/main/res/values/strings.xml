@@ -18,6 +18,14 @@
     <string name="rest">Rest</string>
     <string name="play_minutes_hint">Play minutes (e.g., 30)</string>
     <string name="rest_minutes_hint">Rest minutes (e.g., 30)</string>
+    <string name="configure_rest">Customize rest screen</string>
+    <string name="rest_settings_title">Rest screen settings</string>
+    <string name="rest_message_hint">Rest message (e.g., Take a stretch!)</string>
+    <string name="rest_theme_default">Calm light</string>
+    <string name="rest_theme_forest">Forest dusk</string>
+    <string name="rest_theme_sunset">Sunset glow</string>
+    <string name="rest_theme_label">Color palette</string>
+    <string name="save">Save</string>
     <string name="missing_overlay">Overlay permission is required.</string>
     <string name="missing_usage_stats">Usage access is required.</string>
     <string name="missing_accessibility">Accessibility service is disabled.</string>
