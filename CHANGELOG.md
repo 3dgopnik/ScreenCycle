@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 ### Added
+- Added countdown timer and playful progress indicator to the rest screen.
 - Declared package visibility permission and launcher queries to support app selection screen.
 - Added search field to filter applications on the selection screen in real time.
 - Added notification controls to adjust play and rest durations with instant updates and safe limits.
@@ -66,6 +67,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Cycle service now launches the rest screen as soon as the REST phase starts to avoid delays.
 
 ### Docs
+- Documented refreshed rest screen UI in `docs/ru/index.md` and `docs/en/index.md`.
 - Documented troubleshooting steps for package visibility permission.
 - Added user manual skeleton with build and run instructions and linked docs from README.
 - Documented AndroidX and Jetifier build requirements.

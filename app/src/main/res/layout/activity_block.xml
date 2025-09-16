@@ -5,12 +5,45 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <TextView
-        android:id="@+id/tvRestMessage"
+    <LinearLayout
+        android:id="@+id/restContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorOnBackground"
-        android:text="@string/rest_now"
-        android:textSize="24sp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <TextView
+            android:id="@+id/tvRestMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/rest_now"
+            android:textAlignment="center"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvRestTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="00:00"
+            android:textAlignment="center"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/pbRestProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="260dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:indeterminate="false"
+            android:max="1000"
+            android:progress="0"
+            android:progressDrawable="@drawable/rest_bubble_progress" />
+    </LinearLayout>
 </FrameLayout>
