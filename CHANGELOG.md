@@ -55,6 +55,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Start button now detects running cycle on app return and shows **Stop**.
 - Use `getEnabledAccessibilityServiceList` to query enabled accessibility services.
 - Declared `SYSTEM_ALERT_WINDOW` permission so the app appears in overlay settings.
+- Excluded `/META-INF/LICENSE.md` from packaging to prevent resource merge conflicts during tests.
 
 ### Docs
 - Added user manual skeleton with build and run instructions and linked docs from README.
