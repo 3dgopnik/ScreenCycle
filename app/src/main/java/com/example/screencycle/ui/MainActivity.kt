@@ -11,8 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.textfield.TextInputEditText
 import com.example.screencycle.R
 import com.example.screencycle.core.CycleService
@@ -106,9 +106,11 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         cycleRunning = isCycleServiceRunning()
         btnStart.text = if (cycleRunning) getString(R.string.stop) else getString(R.string.start)
-        LocalBroadcastManager.getInstance(this).registerReceiver(
+        ContextCompat.registerReceiver(
+            this,
             stateReceiver,
-            IntentFilter(CycleService.ACTION_STATE)
+            IntentFilter(CycleService.ACTION_STATE),
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
 
@@ -127,7 +129,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(stateReceiver)
+        unregisterReceiver(stateReceiver)
         super.onStop()
     }
 
