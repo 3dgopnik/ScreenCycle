@@ -86,3 +86,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Documented category selection screen in the UI guide.
 - Expanded UI guide to mention all standard categories.
 - Added UI guide section covering rest screen customization dialog.
+- Documented child-friendly countdown timer and smart mode configuration in Russian and English manuals.
