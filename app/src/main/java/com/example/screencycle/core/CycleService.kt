@@ -14,6 +14,7 @@ import com.example.screencycle.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import com.example.screencycle.ui.BlockActivity
 
 class CycleService : Service() {
     companion object {
@@ -83,6 +84,9 @@ class CycleService : Service() {
         val totalMillis = minutes * 60_000L
         val phase = PhaseState(rest, totalMillis, totalMillis)
         stateMutex.withLock { currentPhase = phase }
+        if (rest) {
+            showRestScreen()
+        }
         while (running) {
             val remaining = stateMutex.withLock { phase.remainingMillis }
             if (remaining <= 0) break
@@ -204,6 +208,15 @@ class CycleService : Service() {
     }
 
     private data class PhaseStateSnapshot(val isRest: Boolean, val remainingMillis: Long)
+
+    private suspend fun showRestScreen() {
+        withContext(Dispatchers.Main) {
+            val intent = Intent(this@CycleService, BlockActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            }
+            startActivity(intent)
+        }
+    }
 
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
