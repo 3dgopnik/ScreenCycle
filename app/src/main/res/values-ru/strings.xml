@@ -7,6 +7,7 @@
     <string name="stop">Остановить</string>
     <string name="working">Работает...</string>
     <string name="select_games">Выбрать игры</string>
+    <string name="search_hint_apps">Найдите игру или приложение</string>
     <string name="selected_games_none">Выбрано игр: 0</string>
     <string name="selected_games_count">Выбрано игр: %1$d</string>
     <string name="select_categories">Выбрать категории</string>
