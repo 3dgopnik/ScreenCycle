@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Finalized adaptive launcher icons and moved them to mipmap resources.
 - Updated Russian translations for accessibility description and battery optimization dialog.
 - Consolidated permissions into a single screen listing all missing requirements.
+- Updated `MainActivity` instrumented test assertions to use `org.junit.Assert` APIs.
 
 ### Removed
 - Removed legacy `Prefs` helper based on `SharedPreferences`.
