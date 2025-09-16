@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.screencycle.R
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
@@ -36,12 +37,18 @@ class SettingsRepository(private val context: Context) {
     suspend fun getBlockedPackages(): Set<String> =
         dataStore.data.map { it[BLOCKED_PACKAGES] ?: emptySet() }.first()
 
+    fun getBlockedPackagesFlow(): Flow<Set<String>> =
+        dataStore.data.map { it[BLOCKED_PACKAGES] ?: emptySet() }
+
     suspend fun setBlockedCategories(categories: Set<String>) {
         dataStore.edit { it[BLOCKED_CATEGORIES] = categories }
     }
 
     suspend fun getBlockedCategories(): Set<String> =
         dataStore.data.map { it[BLOCKED_CATEGORIES] ?: emptySet() }.first()
+
+    fun getBlockedCategoriesFlow(): Flow<Set<String>> =
+        dataStore.data.map { it[BLOCKED_CATEGORIES] ?: emptySet() }
 
     suspend fun setPinHash(hash: String) {
         dataStore.edit { it[PIN_HASH] = hash }
