@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.screencycle.R
 import kotlinx.coroutines.*
 
@@ -75,8 +74,9 @@ class CycleService : Service() {
         val i = Intent(ACTION_STATE).apply {
             putExtra(EXTRA_REST, rest)
             putExtra(EXTRA_REMAINING, remaining)
+            setPackage(packageName)
         }
-        LocalBroadcastManager.getInstance(this).sendBroadcast(i)
+        sendBroadcast(i)
     }
 
     private fun notification(text: String): Notification =

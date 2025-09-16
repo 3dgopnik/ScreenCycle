@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Set Java and Kotlin compilation targets to version 17.
 - Switched app theme to inherit from `Theme.MaterialComponents.DayNight.NoActionBar`.
 - Replaced `Prefs` usage in activities and services with `SettingsRepository`.
-- Replaced global broadcasts with `LocalBroadcastManager`.
+- Switched cycle state delivery to in-app broadcasts registered via `ContextCompat.registerReceiver`.
 - `AppAccessibilityService` now returns to the home screen and launches `BlockActivity` during rest for selected packages or categories.
 - Cycle starts only when required permissions are granted.
 - Start button toggles between "Working..." and "Stop" while the cycle runs.

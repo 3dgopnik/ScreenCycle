@@ -2,9 +2,10 @@ package com.example.screencycle.core
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent
+import android.content.IntentFilter
 import android.view.accessibility.AccessibilityEvent
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.screencycle.ui.BlockActivity
 
 class AppAccessibilityService : AccessibilityService() {
@@ -42,9 +43,11 @@ class AppAccessibilityService : AccessibilityService() {
 
     override fun onCreate() {
         super.onCreate()
-        LocalBroadcastManager.getInstance(this).registerReceiver(
+        ContextCompat.registerReceiver(
+            this,
             stateReceiver,
-            android.content.IntentFilter(CycleService.ACTION_STATE)
+            IntentFilter(CycleService.ACTION_STATE),
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
         scope.launch {
             packages = settings.getBlockedPackages()
@@ -53,7 +56,7 @@ class AppAccessibilityService : AccessibilityService() {
     }
 
     override fun onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(stateReceiver)
+        unregisterReceiver(stateReceiver)
         scope.cancel()
         super.onDestroy()
     }

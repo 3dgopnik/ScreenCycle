@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.core.content.ContextCompat
 import com.example.screencycle.R
 import com.example.screencycle.core.CycleService
 
@@ -27,14 +27,16 @@ class BlockActivity : AppCompatActivity() {
             android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_block)
-        LocalBroadcastManager.getInstance(this).registerReceiver(
+        ContextCompat.registerReceiver(
+            this,
             stateReceiver,
-            IntentFilter(CycleService.ACTION_STATE)
+            IntentFilter(CycleService.ACTION_STATE),
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
 
     override fun onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(stateReceiver)
+        unregisterReceiver(stateReceiver)
         super.onDestroy()
     }
 }
