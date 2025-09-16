@@ -8,6 +8,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import com.example.screencycle.R
 import com.example.screencycle.core.Permissions
@@ -31,7 +32,7 @@ class PermissionsActivity : AppCompatActivity() {
     }
 
     private fun rebuildList() {
-        val pm = getSystemService(PowerManager::class.java)
+        val pm = powerManagerOverride ?: getSystemService(PowerManager::class.java)
         items = collectMissingPermissions(this, pm)
         if (items.isEmpty()) {
             finish()
@@ -44,7 +45,13 @@ class PermissionsActivity : AppCompatActivity() {
     data class MissingPermission(val msgRes: Int, val intent: Intent)
 
     companion object {
-        fun collectMissingPermissions(ctx: Context, pm: PowerManager? = ctx.getSystemService(PowerManager::class.java)): List<MissingPermission> {
+        @VisibleForTesting
+        var powerManagerOverride: PowerManager? = null
+
+        fun collectMissingPermissions(
+            ctx: Context,
+            pm: PowerManager? = powerManagerOverride ?: ctx.getSystemService(PowerManager::class.java)
+        ): List<MissingPermission> {
             val missing = mutableListOf<MissingPermission>()
             if (!Permissions.canDrawOverlays(ctx)) {
                 missing += MissingPermission(
