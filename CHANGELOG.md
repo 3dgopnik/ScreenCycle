@@ -62,6 +62,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Use `getEnabledAccessibilityServiceList` to query enabled accessibility services.
 - Declared `SYSTEM_ALERT_WINDOW` permission so the app appears in overlay settings.
 - Excluded `/META-INF/LICENSE.md` from packaging to prevent resource merge conflicts during tests.
+- Accessibility service now refreshes blocked apps and categories immediately after settings changes.
 
 ### Docs
 - Documented troubleshooting steps for package visibility permission.

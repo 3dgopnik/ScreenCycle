@@ -6,6 +6,7 @@ import android.content.IntentFilter
 import android.view.accessibility.AccessibilityEvent
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import com.example.screencycle.ui.BlockActivity
 
 class AppAccessibilityService : AccessibilityService() {
@@ -50,8 +51,10 @@ class AppAccessibilityService : AccessibilityService() {
             ContextCompat.RECEIVER_NOT_EXPORTED
         )
         scope.launch {
-            packages = settings.getBlockedPackages()
-            categories = settings.getBlockedCategories()
+            settings.getBlockedPackagesFlow().collect { packages = it }
+        }
+        scope.launch {
+            settings.getBlockedCategoriesFlow().collect { categories = it }
         }
     }
 
