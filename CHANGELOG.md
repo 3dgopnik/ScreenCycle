@@ -63,6 +63,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Declared `SYSTEM_ALERT_WINDOW` permission so the app appears in overlay settings.
 - Excluded `/META-INF/LICENSE.md` from packaging to prevent resource merge conflicts during tests.
 - Accessibility service now refreshes blocked apps and categories immediately after settings changes.
+- Cycle service now launches the rest screen as soon as the REST phase starts to avoid delays.
 
 ### Docs
 - Documented troubleshooting steps for package visibility permission.
