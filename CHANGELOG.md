@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Added base `.editorconfig` and `.gitattributes` for consistent formatting.
 - Added instrumented test to verify `MainActivity` launches without exceptions.
 - Added instrumented tests for permission dialog and service start/stop.
+- Added `PermissionsAndStartStopTest` covering permissions list intents and cycle toggling.
 - Added `SettingsRepository` using DataStore for durations and blocked packages.
 - Added support for blocking app categories alongside packages.
 - Added screen to select app categories for blocking.
